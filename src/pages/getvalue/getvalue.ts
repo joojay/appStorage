@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the GetvaluePage page.
@@ -14,12 +15,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'getvalue.html',
 })
 export class GetvaluePage {
+  username:string;
+  student:string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage) {
+    this.storage.ready().then(
+      ()=>{
+        this.storage.get('username').then(
+          (valName)=>{
+            this.username=valName;
+          }
+        );
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+        this.storage.get('student').then(
+          (valId)=>{
+            this.student=valId;
+      }
+    );
+    }
+    );
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad GetvaluePage');
+  
   }
-
 }
+
+
